@@ -21,3 +21,5 @@ services:
       POSTGRES_DB: my-db
       POSTGRES_USER: my-db
       POSTGRES_PASSWORD: my-db-password
+volumes:
+  weatherlyProd:
