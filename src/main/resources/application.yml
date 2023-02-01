@@ -1,0 +1,47 @@
+quarkus:
+  http:
+    port: 8081
+    host: localhost
+  rest-client:
+    back4AppApi:
+      url: https://parseapi.back4app.com
+      scope: singleton
+    dwdApi:
+      url: https://opendata.dwd.de/
+      scope: singleton
+  datasource:
+    db-kind: pg
+    username: ${DATABASE_USER:my-db}
+    password: ${DATABASE_PASSWORD:my-db-password}
+    jdbc:
+      url: jdbc:postgresql://${DATABASE_HOST:localhost:5432}/${DATABASE_NAME:my-db}
+      max-size: 16
+  hibernate-orm:
+    database:
+      generation: update
+    log:
+      sql: true
+  container-image:
+    build: false
+    push: false
+    registry: 0815hunter
+    group:
+    name: weatherly
+"%prod":
+  quarkus:
+    hibernate-orm:
+      database:
+        generation: update
+    container-image:
+      build: true
+"%prod-native":
+  quarkus:
+    native:
+      container-build: true
+"%dev":
+  quarkus:
+    devservices:
+      enabled: false
+    http:
+      port: 8082
+      host: localhost

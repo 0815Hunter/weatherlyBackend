@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  api:
+    image: 0815hunter/weatherly:1.0-SNAPSHOT
+    container_name: weatherly-api
+    restart: always
+    depends_on:
+      - db
+    environment:
+      DATABASE_HOST: db:5432
+      DATABASE_NAME: my-db
+      DATABASE_USER: my-db
+      DATABASE_PASSWORD: my-db-password
+  db:
+    image: postgres:15.1-alpine
+    container_name: weatherly-db
+    restart: always
+    volumes:
+      - weatherlyProd:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: my-db
+      POSTGRES_USER: my-db
+      POSTGRES_PASSWORD: my-db-password
