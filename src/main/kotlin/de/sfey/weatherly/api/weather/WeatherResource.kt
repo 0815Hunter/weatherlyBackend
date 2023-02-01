@@ -23,6 +23,7 @@ class WeatherResource @Inject constructor(val dwdService: DwdService) {
 
     @GET
     @CacheResult(cacheName = "nearest-weather-station-cache") // TODO configure cache settings
+    @Transactional
     fun getNearestByGeolocation(@RestQuery lat: BigDecimal, @RestQuery long: BigDecimal): WeatherStation {
 
         val geoLocation = GeoLocation(lat = lat, long = long)
